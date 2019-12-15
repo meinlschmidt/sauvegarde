@@ -282,7 +282,7 @@ static gchar *get_a_list_of_files(server_struct_t *server_struct, struct MHD_Con
                            query->hostname, query->uid, query->gid, query->owner, query->group,                     \
                            query->filename, query->date, query->afterdate, query->beforedate, query->latest);
 
-            if (query->hostname != NULL && query-> uid != NULL && query->gid != NULL && query->owner != NULL && query->group != NULL)
+            if (query->hostname != NULL)
                 {
                     answer = backend->get_list_of_files(server_struct, query);
                 }
