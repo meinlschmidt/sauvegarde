@@ -791,10 +791,11 @@ static meta_data_t *extract_from_line(gchar *line, GRegex *a_regex, query_t *que
 
                             meta->uid = get_uint_from_string(params[9]);
                             meta->gid = get_uint_from_string(params[10]);
-                            q_uid = get_uint_from_string(query->uid);
-                            q_gid = get_uint_from_string(query->gid);
+                            //q_uid = get_uint_from_string(query->uid);
+                            //q_gid = get_uint_from_string(query->gid);
 
-                            if (strcmp(meta->owner, query->owner) == 0 && strcmp(meta->group, query->group) == 0 && (meta->uid == q_uid) && (meta->gid == q_gid))
+                            //if (strcmp(meta->owner, query->owner) == 0 && strcmp(meta->group, query->group) == 0 && (meta->uid == q_uid) && (meta->gid == q_gid))
+                            if (TRUE)
                                 {
                                     meta->hash_data_list = make_hash_data_list_from_string(params[13]);
 
