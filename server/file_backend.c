@@ -795,18 +795,12 @@ static meta_data_t *extract_from_line(gchar *line, GRegex *a_regex, query_t *que
                             //q_gid = get_uint_from_string(query->gid);
 
                             //if (strcmp(meta->owner, query->owner) == 0 && strcmp(meta->group, query->group) == 0 && (meta->uid == q_uid) && (meta->gid == q_gid))
-                            if (TRUE)
-                                {
-                                    meta->hash_data_list = make_hash_data_list_from_string(params[13]);
 
-                                    /* This debug message has no text to be translated */
-                                    print_debug("file_backend: --> type %d, inode: %"G_GUINT64_FORMAT", mode: %d, atime: %"G_GUINT64_FORMAT", ctime: %"G_GUINT64_FORMAT", mtime: %"G_GUINT64_FORMAT", size: %"G_GUINT64_FORMAT", filename: %s, owner: %s, group: %s, uid: %d, gid: %d, link: %s\n", meta->file_type, meta->inode, meta->mode, meta->atime, meta->ctime, meta->mtime, meta->size, meta->name, meta->owner, meta->group, meta->uid, meta->gid, meta->link);
-                                 }
-                            else
-                                {
-                                    free_meta_data_t(meta, TRUE);
-                                    meta = NULL;
-                                }
+                            meta->hash_data_list = make_hash_data_list_from_string(params[13]);
+
+                            /* This debug message has no text to be translated */
+                            print_debug("file_backend: --> type %d, inode: %"G_GUINT64_FORMAT", mode: %d, atime: %"G_GUINT64_FORMAT", ctime: %"G_GUINT64_FORMAT", mtime: %"G_GUINT64_FORMAT", size: %"G_GUINT64_FORMAT", filename: %s, owner: %s, group: %s, uid: %d, gid: %d, link: %s\n", meta->file_type, meta->inode, meta->mode, meta->atime, meta->ctime, meta->mtime, meta->size, meta->name, meta->owner, meta->group, meta->uid, meta->gid, meta->link);
+
                         }
                     else
                         {
@@ -814,11 +808,12 @@ static meta_data_t *extract_from_line(gchar *line, GRegex *a_regex, query_t *que
                              meta = NULL;
                         }
                 }
-            else if(g_regex_match(a_regex, filename, 0, NULL) && (query->reduced == TRUE))
-            {
+                else if(g_regex_match(a_regex, filename, 0, NULL) && (query->reduced == TRUE))
+                {
                                     meta = new_meta_data_t();
 
                                     meta->name = filename;
+                                    meta->file_type = get_uint_from_string(params[0]);
                                     meta->mtime = get_guint64_from_string(params[5]);
 
                                     res = compare_mtime_to_date(meta->mtime, query->date);
@@ -838,26 +833,17 @@ static meta_data_t *extract_from_line(gchar *line, GRegex *a_regex, query_t *que
 
                                     if (res == TRUE)
                                         {
+                                        meta->size = get_guint64_from_string(params[6]);
+                                        /* This debug message has no text to be translated */
+                                        print_debug("file_backend: --> type %d, inode: %"G_GUINT64_FORMAT", mode: %d, atime: %"G_GUINT64_FORMAT", ctime: %"G_GUINT64_FORMAT", mtime: %"G_GUINT64_FORMAT", size: %"G_GUINT64_FORMAT", filename: %s, owner: %s, group: %s, uid: %d, gid: %d, link: %s\n", meta->file_type, meta->inode, meta->mode, meta->atime, meta->ctime, meta->mtime, meta->size, meta->name, meta->owner, meta->group, meta->uid, meta->gid, meta->link);
 
-                                            if (TRUE)
-                                                {
-                                                    //meta->hash_data_list = make_hash_data_list_from_string(params[13]);
-
-                                                    /* This debug message has no text to be translated */
-                                                    print_debug("file_backend: --> type %d, inode: %"G_GUINT64_FORMAT", mode: %d, atime: %"G_GUINT64_FORMAT", ctime: %"G_GUINT64_FORMAT", mtime: %"G_GUINT64_FORMAT", size: %"G_GUINT64_FORMAT", filename: %s, owner: %s, group: %s, uid: %d, gid: %d, link: %s\n", meta->file_type, meta->inode, meta->mode, meta->atime, meta->ctime, meta->mtime, meta->size, meta->name, meta->owner, meta->group, meta->uid, meta->gid, meta->link);
-                                                 }
-                                            else
-                                                {
-                                                    free_meta_data_t(meta, TRUE);
-                                                    meta = NULL;
-                                                }
                                         }
                                     else
                                         {
                                              free_meta_data_t(meta, TRUE);
                                              meta = NULL;
                                         }
-            }
+                }
             else
                 {
                     free_variable(filename);
