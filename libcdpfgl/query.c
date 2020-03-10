@@ -44,7 +44,7 @@
  * @returns a newly allocated query_t * structure filled  with the
  *          corresponding data that may be freed when no longer needed.
  */
-query_t *init_query_t(gchar *hostname, gchar *uid, gchar *gid, gchar *owner, gchar *group, gchar *filename, gchar *date, gchar *afterdate, gchar *beforedate, gboolean latest)
+query_t *init_query_t(gchar *hostname, gchar *uid, gchar *gid, gchar *owner, gchar *group, gchar *filename, gchar *date, gchar *afterdate, gchar *beforedate, gboolean latest, gboolean reduced)
 {
     query_t *query = NULL;
 
@@ -60,6 +60,7 @@ query_t *init_query_t(gchar *hostname, gchar *uid, gchar *gid, gchar *owner, gch
     query->afterdate = afterdate;
     query->beforedate = beforedate;
     query->latest = latest;
+    query->reduced = reduced;
 
     return query;
 }

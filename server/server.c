@@ -265,7 +265,7 @@ static gchar *get_a_list_of_files(server_struct_t *server_struct, struct MHD_Con
 
     if (backend->get_list_of_files != NULL)
         {
-            query = init_query_t(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, FALSE);
+            query = init_query_t(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, FALSE, FALSE);
 
             query->hostname = get_argument_value_from_key(connection, "hostname", FALSE);
             query->uid = get_argument_value_from_key(connection, "uid", FALSE);
@@ -277,6 +277,7 @@ static gchar *get_a_list_of_files(server_struct_t *server_struct, struct MHD_Con
             query->afterdate = get_argument_value_from_key(connection, "afterdate", TRUE);
             query->beforedate = get_argument_value_from_key(connection, "beforedate", TRUE);
             query->latest = get_boolean_argument_value_from_key(connection, "latest");
+            query->reduced = get_boolean_argument_value_from_key(connection, "reduced");
 
             print_debug(_("hostname: %s, uid: %s, gid: %s, owner: %s, group: %s, filter: %s && %s && %s && %s && %d\n"), \
                            query->hostname, query->uid, query->gid, query->owner, query->group,                     \

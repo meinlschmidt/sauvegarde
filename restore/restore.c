@@ -140,7 +140,7 @@ static query_t *prepare_query(gchar *hostname)
             the_uid = g_strdup_printf("%d", uid);
             the_gid = g_strdup_printf("%d", pass->pw_gid);
 
-            query = init_query_t(hostname, the_uid, the_gid, owner, group, NULL, NULL, NULL, NULL, FALSE);
+            query = init_query_t(hostname, the_uid, the_gid, owner, group, NULL, NULL, NULL, NULL, FALSE, FALSE);
             print_debug(_("hostname: %s, uid: %s, gid: %s, owner: %s, group: %s\n"), hostname, the_uid, the_gid, owner, group);
         }
 
