@@ -1,3 +1,8 @@
+This is a forked version from [continuous data protection for gnu/linux (cdpfgl)](https://github.com/dupgit/sauvegarde)
+with slightly adjustments to be used for the [cdp-forensic-webserver](https://github.com/meinlschmidt/cdp-forensic-webserver).
+
+The installation of this fork is identical to the following original readme and was successfully tested on Ubuntu 18.04 LTS. 
+
 # cdpfgl: Continuous data protection for GNU/Linux
 
 This page is cdpfgl's doxygen's @mainpage.
